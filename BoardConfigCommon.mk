@@ -25,7 +25,7 @@
 # against the traditional rules of inheritance).
 
 # Include path
-TARGET_SPECIFIC_HEADER_PATH := device/htc/msm8960-common/include
+TARGET_SPECIFIC_HEADER_PATH := device/motorola/msm8960-common/include
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -63,7 +63,7 @@ TARGET_USES_ION_AUDIO := true
 TARGET_USES_QCOM_LPA := true
 
 # BluetoothBOARD_HAVE_BLUETOOTH := true
-# TARGET_CUSTOM_BLUEDROID := ../../../device/htc/msm8960-common/bluetooth/bluetooth.c
+# TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/msm8960-common/bluetooth/bluetooth.c
 
 # FM radio
 #BOARD_HAVE_FM_RADIO := true
@@ -80,7 +80,7 @@ TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 TARGET_USES_OVERLAY := true
 #TARGET_QCOM_HDMI_OUT := true
-BOARD_EGL_CFG := device/htc/msm8960-common/configs/egl.cfg
+BOARD_EGL_CFG := device/motorola/msm8960-common/configs/egl.cfg
 
 # Wifi
 #WPA_SUPPLICANT_VERSION           := VER_0_8_X
@@ -92,4 +92,4 @@ BOARD_EGL_CFG := device/htc/msm8960-common/configs/egl.cfg
 # Webkit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
-DYNAMIC_SHARED_LIBV8SO := true
+DYNAMIC_SHARED_LIBV8SO := false
