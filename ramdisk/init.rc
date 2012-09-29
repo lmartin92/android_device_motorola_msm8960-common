@@ -47,7 +47,7 @@ on init
 
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /cache 077 system cache
+    mkdir /cache 0771 system cache
     mkdir /config 0500 root root
     mkdir /carrier 0770 system system
 
