@@ -22,7 +22,7 @@ on init
     export SECONDARY_STORAGE /mnt/external1
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
-    export ANDROID_CACHE /cache
+    export ANDROID_CACHE /data
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework-ext.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar:/system/framework/filterfw.jar:/system/framework/kafdex.jar
     
     # Backward compatibility
