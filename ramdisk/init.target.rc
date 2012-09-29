@@ -121,10 +121,10 @@ on emmc-fs
 on post-fs
    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro remount
 
-# Enable Cifs module
+    # Enable Cifs module
     insmod /system/lib/modules/cifs.ko
 
-# Install webtop modules
+    # Install webtop modules
     insmod /system/lib/modules/evfwd.ko
 
 on post-fs-data
@@ -132,19 +132,19 @@ on post-fs-data
     chown root log /data/dontpanic/apanic_app_threads
     chmod 0660 /data/dontpanic/apanic_app_threads
 
-# directory for encryption management tool, enc_mgt_tool
+    # directory for encryption management tool, enc_mgt_tool
     mkdir /data/emt 0770 root system
 
-# To remove apanic proc entry
+    # To remove apanic proc entry
     write /proc/apanic_console 1
 
 on boot
    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-# Set core max size (2G)
+    # Set core max size (2G)
    setrlimit 4 2147483648 2147483648
 
-# Setup 160M zram device for swap space
+    # Setup 160M zram device for swap space
    write /sys/block/zram0/disksize 167772160
    exec /system/bin/motobox mkswap /dev/block/zram0
    exec /system/bin/motobox swapon /dev/block/zram0
@@ -238,7 +238,7 @@ on boot
    chown nfc nfc /sys/devices/virtual/misc/pn544/pn544_control_dev
    chmod 0660 /sys/devices/virtual/misc/pn544/pn544_control_dev
 
-# create the necessary data dirs for tpapi with proper permission
+    # create the necessary data dirs for tpapi with proper permission
     mkdir /dev/tpapi 2770 mot_tpapi mot_tpapi
     mkdir /data/tpapi
     mkdir /data/tpapi/etc
@@ -294,23 +294,23 @@ on boot
     chmod 0775 /pds/public/atvc
     mkdir /data/local/dbvc 0750 mot_tcmd shell
 
-# Create 12m directory that TCMD can write to
+    # Create 12m directory that TCMD can write to
     mkdir /data/local/12m 0750 mot_tcmd shell
 
-# Define TCP buffer sizes for ethernet
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    # Define TCP buffer sizes for ethernet
+    #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.ethernet    131072,262144,524288,4096,16384,131072
 
-# Set permissions for evfwd module (webtop)
+    # Set permissions for evfwd module (webtop)
     chown system system /sys/devices/platform/evfwdrel/rel
     chown system system /sys/devices/platform/evfwdkbd/kbd
     chown system system /sys/devices/platform/evfwdabs/abs
 
-# Perform misc target initialization
+    # Perform misc target initialization
     exec /system/bin/sh /system/bin/init.target.sh
 
-# Start services
-   exec /system/bin/mot_boot_mode
+    # Start services
+    exec /system/bin/mot_boot_mode
 
 on charger
     trigger early-fs
@@ -322,40 +322,40 @@ on charger
     trigger start-charging
 
 on start-charging
-   # Permissions for battery health daemon
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_real_fcc_batt_temp
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_real_fcc_mah
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_soc
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_ocv_uv
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_rbatt
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_charge_increase
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_chargecycles
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/bms_aged_capacity
-   chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/timestamp
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/pcb_temp
+    # Permissions for battery health daemon
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_real_fcc_batt_temp
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_real_fcc_mah
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_soc
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_ocv_uv
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_rbatt
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_charge_increase
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_chargecycles
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/bms_aged_capacity
+    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/timestamp
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/pcb_temp
 
-   # Permissions for Factory Test of Charging Paths
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_auto_enable
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_ibatt
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_itrick
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_iusb
-   chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_usb_suspend
-  start batt_health
-  start whisperd
-  start qcom-post-boot
-  write /sys/devices/system/cpu/cpu1/online 0
-  exec /system/bin/charge_only_mode
+    # Permissions for Factory Test of Charging Paths
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_auto_enable
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_ibatt
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_itrick
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_iusb
+    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_usb_suspend
+    start batt_health
+    start whisperd
+    start qcom-post-boot
+    write /sys/devices/system/cpu/cpu1/online 0
+    exec /system/bin/charge_only_mode
 
 on property:sys.chargeonly.mode=1
-  class_stop core
-  class_stop main
-  class_stop late_start
-  start batt_health
-  start whisperd
-  start qcom-post-boot
-  write /sys/devices/system/cpu/cpu1/online 0
-  write /data/chargeonlymode charging
-  exec /system/bin/charge_only_mode
+    class_stop core
+    class_stop main
+    class_stop late_start
+    start batt_health
+    start whisperd
+    start qcom-post-boot
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /data/chargeonlymode charging
+    exec /system/bin/charge_only_mode
 
 on property:ro.build.type=eng
    chmod 0777 /data/anr
@@ -505,9 +505,6 @@ on property:ro.baseband=mdm
     mkdir /data/qcks 0770 system system
     start kickstart
 
-service telnet /system/bin/telnetd
-    class core
-
 #start Authentec VPN service
 service vpnclientpm /system/bin/vpnclientpm
     class main
@@ -534,11 +531,6 @@ service qdumpd /system/bin/qdumpd
     class main
     user radio
     group log sdcard_rw
-
-#service RescueStarter /system/bin/RescueStarter
-#    class main
-#    user graphics
-#    group input graphics
 
 #Run multiconfig script to check if config is updated
 service start_mc_service /system/bin/sh /system/bin/multiconfig_boot_script.sh
