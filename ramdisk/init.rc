@@ -47,7 +47,7 @@ on init
 
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /cache 0770 system cache
+    mkdir /cache 077 system cache
     mkdir /config 0500 root root
     mkdir /carrier 0770 system system
 
@@ -117,8 +117,8 @@ on emmc-fs
     
     # mount /persist
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev
-    exec /system/bin/logwrapper /system/bin/mount_ext4.sh cache /dev/block/platform/msm_sdcc.1/by-name/cache /cache
-    exec /system/bin/logwrapper /system/bin/mount_ext4.sh carrier /dev/block/platform/msm_sdcc.1/by-name/carriercust /carrier
+    #exec /system/bin/logwrapper /system/bin/mount_ext4.sh cache /dev/block/platform/msm_sdcc.1/by-name/cache /cache
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache defaults
 
 on post-fs
     # once everything is setup, no need to modify /
